@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_id": "locus-test-75686",
+    "project_number": "210895091948",
+    "name": "Locus Test"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210895091948:android:8c17f094c564d0a5",
+        "client_id": "android:ninja.arjun.locustest",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "ninja.arjun.locustest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "210895091948-lknbqs4p01t4li4vgj3uv3f6jsrhhanf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ninja.arjun.locustest",
+            "certificate_hash": "AC142A411EAE62A978F86C3761B1957FFB081C46"
+          }
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
