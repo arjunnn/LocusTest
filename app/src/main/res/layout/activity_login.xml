@@ -11,9 +11,8 @@
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/loginText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="17dp" />
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,26 +20,16 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/loginOptionSeparator"
         android:id="@+id/textView"
-        android:layout_marginBottom="22dp"
-        android:layout_above="@+id/sign_in_button"
+        android:visibility="visible"
+        android:layout_below="@+id/facebook_login_button"
         android:layout_centerHorizontal="true"
-        android:visibility="invisible" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/loginText"
-        android:id="@+id/loginText"
-        android:textSize="20sp"
-        android:textStyle="normal"
-        android:textColor="#8080ff"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:paddingTop="15sp"
+        android:paddingBottom="15sp" />
 
     <ImageView
-        android:layout_width="192dp"
-        android:src="@mipmap/ic_launcher"
-        android:layout_height="192dp"
+        android:layout_width="192sp"
+        android:src="@drawable/ic_launcher"
+        android:layout_height="192sp"
         android:id="@+id/imageView"
         android:layout_above="@+id/appCaption"
         android:layout_centerHorizontal="true" />
@@ -55,5 +44,13 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebook_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="55sp"
+        android:layout_below="@+id/appCaption"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

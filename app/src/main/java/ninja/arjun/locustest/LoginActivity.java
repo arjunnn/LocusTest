@@ -9,12 +9,22 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -22,6 +32,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import com.facebook.FacebookSdk;
+import android.view.View;
+
+import org.json.JSONObject;
+
 
 public class LoginActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -31,11 +47,58 @@ public class LoginActivity extends AppCompatActivity implements
     private static final int RC_SIGN_IN = 9001;  // Google sign in button code
     private static final String TAG = "SignInActivity";  // Google sign in button code
 
-
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
+
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+
+                        GraphRequest request = GraphRequest.newMeRequest(
+                                loginResult.getAccessToken(),
+                                new GraphRequest.GraphJSONObjectCallback() {
+                                    @Override
+                                    public void onCompleted(
+                                            JSONObject object,
+                                            GraphResponse response) {
+                                        // Application code
+                                        Log.v("LoginActivity", response.toString());
+                                    }
+                                });
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields", "id, name, email, gender, birthday");
+                        request.setParameters(parameters);
+                        request.executeAsync();
+
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Facebook login successful",
+                                Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.BOTTOM, 0, 10);
+                        toast.show();
+
+                        Intent i = new Intent(getApplicationContext(), NavDrawerActivity.class);
+                        startActivity(i);
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                    }
+                });
+
         setContentView(R.layout.activity_login);
 
         findViewById(R.id.sign_in_button).setOnClickListener(this); // if we set like this, we can work on code in onClick()
@@ -45,7 +108,7 @@ public class LoginActivity extends AppCompatActivity implements
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
+                .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
@@ -64,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements
         }
     }
 
-    private void signIn(){
+    private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -76,6 +139,7 @@ public class LoginActivity extends AppCompatActivity implements
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
         }
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
@@ -90,7 +154,7 @@ public class LoginActivity extends AppCompatActivity implements
             Toast toast = Toast.makeText(getApplicationContext(),
                     displayName,
                     Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.BOTTOM, 0, 5);
+            toast.setGravity(Gravity.BOTTOM, 0, 10);
             toast.show();
 
             String personEmail = acct.getEmail();
@@ -111,12 +175,11 @@ public class LoginActivity extends AppCompatActivity implements
 //            startActivity(i);
             Intent i = new Intent(getApplicationContext(), NavDrawerActivity.class);
             startActivity(i);
-        }
-        else {
+        } else {
             Toast toast = Toast.makeText(getApplicationContext(),
                     R.string.loginFailMessage,
                     Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.BOTTOM, 0, 5);
+            toast.setGravity(Gravity.BOTTOM, 0, 10);
             toast.show();
         }
     }
@@ -126,7 +189,8 @@ public class LoginActivity extends AppCompatActivity implements
         Toast toast = Toast.makeText(getApplicationContext(),
                 connectionResult.toString(),
                 Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.BOTTOM, 0, 5);
+        toast.setGravity(Gravity.BOTTOM, 0, 10);
         toast.show();
     }
+
 }
