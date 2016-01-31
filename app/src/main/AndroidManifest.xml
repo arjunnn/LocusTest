@@ -59,7 +59,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"></activity>
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"/>
     </application>
 
 </manifest>
