@@ -78,18 +78,7 @@ public class NavDrawerActivity extends AppCompatActivity
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
-
-
-
-//        Toast toast = Toast.makeText(getApplicationContext(),
-//                name,
-//                Toast.LENGTH_LONG);
-//        toast.setGravity(Gravity.BOTTOM, 0, 10);
-//        toast.show();
-
-//        NameTextView.setText();
-
+        
     }
 
 
@@ -113,15 +102,7 @@ public class NavDrawerActivity extends AppCompatActivity
         String email = sharedPreferences.getString("email", null);
         Uri photoURI = Uri.parse(sharedPreferences.getString("photoURI", null));
 
-//        try {
-//            Bitmap userBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoURI);
-//
-//            ImageView userPhotoImageView = (ImageView) findViewById(R.id.userPhotoImageView);
-//            userPhotoImageView.setImageBitmap(userBitmap);
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
         ImageView userPhotoImageView = (ImageView) findViewById(R.id.userPhotoImageView);
         String url = photoURI.toString();
         BitmapFactory.Options bmOptions;
@@ -130,8 +111,6 @@ public class NavDrawerActivity extends AppCompatActivity
         Bitmap bm = loadBitmap(url, bmOptions);
         bm = Bitmap.createScaledBitmap(bm, 120, 120, false);
         userPhotoImageView.setImageBitmap(getCircleBitmap(bm));
-
-
 
 
         TextView NameTextView = (TextView) findViewById(R.id.NameTextView);
@@ -188,7 +167,8 @@ public class NavDrawerActivity extends AppCompatActivity
             in = OpenHttpConnection(URL);
             bitmap = BitmapFactory.decodeStream(in, null, options);
             in.close();
-        } catch (IOException e1) {
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return bitmap;
     }
@@ -207,7 +187,8 @@ public class NavDrawerActivity extends AppCompatActivity
             if (httpConn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 inputStream = httpConn.getInputStream();
             }
-        } catch (Exception ex) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return inputStream;
     }
