@@ -1,7 +1,6 @@
 package ninja.arjun.locustest;
 
-import android.app.Activity;
-import android.content.ContentResolver;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -16,11 +15,11 @@ import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.provider.ContactsContract;
-import android.provider.MediaStore;
+
+
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.view.Gravity;
+
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -32,10 +31,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -78,7 +76,7 @@ public class NavDrawerActivity extends AppCompatActivity
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        
+
     }
 
 

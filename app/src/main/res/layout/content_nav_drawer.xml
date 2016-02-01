@@ -11,5 +11,10 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ninja.arjun.locustest.NavDrawerActivity"
     tools:showIn="@layout/app_bar_nav_drawer">
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="this is text view"
+    android:text="sdasdhaksdhakhsdasldakdlasdlakhda"
+    style="@style/Base.TextAppearance.AppCompat.Headline" />
 </RelativeLayout>
